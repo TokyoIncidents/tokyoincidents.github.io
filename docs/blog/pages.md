@@ -1,15 +1,17 @@
-# 使用 Hugo 在 GitHub 上部署博客
+# GitHub Pages
 
-## 安装 Hugo 并创建网站
+## Hugo
+
+### 安装 Hugo 并创建网站
 
 用 Scoop 安装：`scoop install hugo`，输入`hugo new site <name>`来创建一个新的网站。此时创建了多个文件夹，`content`是存放网站的资源，`themes`是存放网站的主题。
 
-## 安装主题
+### 安装主题
 
 `git init`将此文件夹初始化为 git 仓库。Hugo 没有自带主题，可以在 https://themes.gohugo.io/ 
 获取。将主题文件夹放在`themes`下即可。我使用的是 [Paper](https://github.com/nanxiaobei/hugo-paper)，请阅读文档了解 Hugo 版本要求和安装方式，如安装 Paper：`git submodule add https://github.com/nanxiaobei/hugo-paper themes/paper`
 
-## 修改配置文件
+### 修改配置文件
 
 编辑`config.toml`来修改网站配置，在主题的文件夹里通常会有`exampleSite`文件夹，里面是默认的网站模板，可以参考进行修改。之后如果用 GitHub Pages 的时候指定`docs`目录，可以加入`publishDir = "docs"`以`docs`方式生成网站的文件，比较方便下面是我已经配置好的：
 
@@ -23,7 +25,7 @@ paginate = 5 # 每页文章个数
   github = 'TokyoIncidents' # 显示一个指向特定 GitHub 用户的 icon 
 ```
 
-## 新建一篇文章并编译网站的文件
+### 新建一篇文章并编译网站的文件
 
 `hugo new post\myblog.md`来新建一个文章。文章开头会有以下字段：
 
@@ -38,7 +40,7 @@ date: 2021-11-27T13:49:11+08:00
 
 在 GitHub，新建一个名字是 blog 的仓库，推送到远程仓库。
 
-## 使用 Actions 自动编译
+### 使用 Actions 自动编译
 
 在 GitHub 账户的开发者设置-Personal access tokens 中新建一个 token，勾选 repo 和 workflow，进入仓库设置-secrets，新建标题为 personal_token ，内容是刚创建的 tokens。新建一个分支 gh-pages 后再新建一个 Action，输入以下代码：
 
@@ -78,13 +80,46 @@ jobs:
 ```
 然后在仓库设置-Pages-Source 中的 Branch:master/(root)，中的 master 改为 gh-pages。这样网站就搭建完成了。
 
-注意 git 子模块的使用
+注意 git 子模块的使用。
 
 
 参考：
 
-[使用 Hugo 从 0 到 1 搭建个人博客](https://sspai.com/post/64639)
+- [使用 Hugo 从 0 到 1 搭建个人博客](https://sspai.com/post/64639)
 
-[记——搭建 hugo+github 静态博客](https://segmentfault.com/a/1190000019823896)
+- [记——搭建 hugo+github 静态博客](https://segmentfault.com/a/1190000019823896)
 
-[如何使用 Hugo 在 GitHub Pages 上搭建免费个人网站](https://zhuanlan.zhihu.com/p/37752930)
+- [如何使用 Hugo 在 GitHub Pages 上搭建免费个人网站](https://zhuanlan.zhihu.com/p/37752930)
+
+## docsify
+
+### 问题
+
+docsify serve docs
+
+侧边栏无法隐藏或打开 - 将这一行删除 `<script src="//cdn.jsdelivr.net/npm/docsify@4"></script>`
+
+页面无法滚动 - 添加以下代码：
+
+```html
+<style type="text/css">
+  body {
+    overflow: auto !important;
+  }
+</style>
+```
+
+复制代码按钮 - 引入`<script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>`
+
+翻页 - [docsify-pagination](https://github.com/imyelo/docsify-pagination)
+
+参考：
+
+- [docsify](https://github.com/docsifyjs/docsify)
+- [docsify 中文文档](https://docsify.js.org/#/zh-cn/)
+- [Github+docsify 打造在线文档网站 - XiaoJ_c - 博客园](https://www.cnblogs.com/XiaoJ-cs/p/15176475.html)
+- [进入多页面后完全无法滚动](https://github.com/docsifyjs/docsify/issues/411)
+- [Docsify README page not scrolling](https://stackoverflow.com/questions/63676806/docsify-readme-page-not-scrolling)
+- [Wiki 系列（一）：Wiki 系统选择](https://sspai.com/post/60382)
+- [Wiki 系列（二）：docsify 部署及配置](https://sspai.com/post/60534)
+- [Wiki 系列（三）：我的 Wiki](https://sspai.com/post/60635)
