@@ -160,7 +160,7 @@
 
 # 其他
 
-[qBittorrent](https://www.qbittorrent.org/) - BitTorrent 下载，有基于它的修改版本[qBittorrent Enhanced Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition)
+[qBittorrent](https://www.qbittorrent.org/) - BitTorrent 下载，有基于它的修改版本 [qBittorrent Enhanced Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition)
 
 [OBS Studio](https://obsproject.com/) - 直播和录屏，是做主播必备的推流软件，单纯用来录屏也可以
 
